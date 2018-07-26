@@ -26,7 +26,7 @@ export default {
       if (toRouter === 'info') {
         this.$router.push({ name: 'info' });
       } else {
-        this.$router.push({ name: 'overview', params: { id: 123 } });
+        this.$router.push({ name: 'overview', params: { id: 123 }, query: { user: 'tom' } });
       }
     }
   }

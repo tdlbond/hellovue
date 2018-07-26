@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
 
-import Login from 'views/login/login.vue';
-import Overview from 'views/overview/overview.vue';
-import Info from 'views/info/info.vue';
+const Home = resolve => require(['./views/Home.vue'], resolve);
+const Login = resolve => require(['views/login/login.vue'], resolve);
+const Overview = resolve => require(['views/overview/overview.vue'], resolve);
+const Info = resolve => require(['views/info/info.vue'], resolve);
 
 Vue.use(Router);
 
@@ -43,8 +43,7 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  console.log(to)
-  console.log(from)
+  
   next();
 });
 
