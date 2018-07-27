@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+const CLA_COUNT = 'CLA_COUNT';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -8,8 +10,8 @@ export default new Vuex.Store({
     count: 0
   },
   mutations: {
-    increate(state) {
-      state.count++;
+    [CLA_COUNT](state, data) {
+      state.count += data;
     }
   },
   actions: {

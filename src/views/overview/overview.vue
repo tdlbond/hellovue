@@ -14,6 +14,7 @@
 </template>
 <script>
 import mixins from 'assets/mixins';
+import { mapState, mapMutations } from 'vuex';
 export default {
   name: 'overview',
   mixins: [mixins],
@@ -22,15 +23,22 @@ export default {
       srcData: 'assets/haha.jpg'
     }
   },
+  computed: {
+    ...mapState([
+      'count'
+    ])
+  },
   methods: {
     saySomething() {
-      // this.sayHello();
-      this.$store.commit('increate')
-      console.log(this.$store.state.count)
+      this.claCount(2);
+      console.log(this.count)
     },
     toLogin() {
       this.$router.push({ name: 'login' });
-    }
+    },
+    ...mapMutations({
+      claCount: 'CLA_COUNT'
+    })
   }
 }
 </script>
