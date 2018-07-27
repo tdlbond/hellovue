@@ -8,6 +8,9 @@
         <el-form-item label="密码：">
           <el-input :model="formData.password"></el-input>
         </el-form-item>
+        <el-form-item label="count：">
+          <p>{{ count }}</p>
+        </el-form-item>
         <el-form-item>
           <el-button @click="ok('loginForm')">确定</el-button>
           <el-button @click="cancel()">取消</el-button>
@@ -18,6 +21,7 @@
 </template>
 <script>
 import mixins from 'assets/mixins';
+import { mapState } from 'vuex';
 export default {
   name: 'login',
   mixins: [mixins],
@@ -29,12 +33,17 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState([
+      'count'
+    ])
+  },
   methods: {
     ok(formName) {
       this.$router.push('/');
     },
     cancel() {
-      
+      console.log(this.$store.state.count);
     }
   },
   created() {

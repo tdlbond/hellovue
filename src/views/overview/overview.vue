@@ -24,7 +24,9 @@ export default {
   },
   methods: {
     saySomething() {
-      this.sayHello();
+      // this.sayHello();
+      this.$store.commit('increate')
+      console.log(this.$store.state.count)
     },
     toLogin() {
       this.$router.push({ name: 'login' });
