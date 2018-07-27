@@ -15,6 +15,8 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    
+    addCount({ commit, state }, data) {
+      commit(CLA_COUNT, data);
+    }
   },
 });

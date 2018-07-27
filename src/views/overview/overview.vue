@@ -6,6 +6,7 @@
     <p class="overview-info-title">hello jumps</p>
     <div class="overview-info">
       <el-button @click="saySomething">saySomething</el-button>
+      <el-button @click="mapaction">mapaction</el-button>
     </div>
     <div class="overview-info" style="margin-top: 20px;">
       <el-button @click="toLogin">Login</el-button>
@@ -14,7 +15,7 @@
 </template>
 <script>
 import mixins from 'assets/mixins';
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 export default {
   name: 'overview',
   mixins: [mixins],
@@ -31,14 +32,21 @@ export default {
   methods: {
     saySomething() {
       this.claCount(2);
-      console.log(this.count)
+      console.log(this.count);
     },
     toLogin() {
       this.$router.push({ name: 'login' });
     },
+    mapaction() {
+      this.addCount(10);
+      console.log(this.count);
+    },
     ...mapMutations({
       claCount: 'CLA_COUNT'
-    })
+    }),
+    ...mapActions([
+      'addCount'
+    ])
   }
 }
 </script>
