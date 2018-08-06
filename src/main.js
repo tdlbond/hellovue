@@ -6,7 +6,10 @@ import store from './store';
 import ElementUi from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
+import directive from './directives/directives';
+
 Vue.use(ElementUi);
+Vue.use(directive);
 
 Vue.config.productionTip = false;
 

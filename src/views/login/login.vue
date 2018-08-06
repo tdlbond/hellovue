@@ -47,7 +47,8 @@ export default {
     }
   },
   created() {
-    console.log('welcom');
+    console.log('hahaha');
+    console.log('hehehe');
   }
 }
 </script>

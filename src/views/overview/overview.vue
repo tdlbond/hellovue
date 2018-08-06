@@ -4,6 +4,7 @@
       <img :src="srcData" alt="">
     </div>
     <p class="overview-info-title" @click="innerGreet">hello jumps</p>
+    <input type="text" v-focus>
     <div class="overview-info">
       <el-button @click="saySomething">saySomething</el-button>
       <el-button @click="mapaction">mapaction</el-button>
