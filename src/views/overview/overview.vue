@@ -4,7 +4,7 @@
       <img :src="srcData" alt="">
     </div>
     <p class="overview-info-title" @click="innerGreet">hello jumps</p>
-    <input type="text" v-focus>
+    <input type="text" v-focus v-model="testValue">
     <div class="overview-info">
       <el-button @click="saySomething">saySomething</el-button>
       <el-button @click="mapaction">mapaction</el-button>
@@ -22,7 +22,8 @@ export default {
   mixins: [mixins],
   data() {
     return {
-      srcData: 'assets/haha.jpg'
+      srcData: 'assets/haha.jpg',
+      testValue: ''
     }
   },
   computed: {
@@ -48,6 +49,12 @@ export default {
     ]),
     innerGreet() {
       this.sayHello();
+    }
+  },
+  watch: {
+    testValue: function(newVal, oldVal) {
+      console.log(this);
+      console.log(newVal, oldVal);
     }
   }
 }
