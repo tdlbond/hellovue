@@ -43,11 +43,11 @@ export default {
       this.$router.push('/');
     },
     cancel() {
-      console.log(this.$store.state.count);
+      
     }
   },
   created() {
-    
+    console.log('welcom');
   }
 }
 </script>

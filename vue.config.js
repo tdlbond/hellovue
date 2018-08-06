@@ -5,6 +5,7 @@ module.exports = {
   chainWebpack: config => {
     config.resolve.alias
       .set('assets', path.join(__dirname, 'src/assets'))
+      .set('src', path.join(__dirname, 'src'))
       .set('views', path.join(__dirname, 'src/views'));
   }
 }

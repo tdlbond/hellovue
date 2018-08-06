@@ -3,7 +3,7 @@
     <div class="overview-info overview-info-avatar">
       <img :src="srcData" alt="">
     </div>
-    <p class="overview-info-title">hello jumps</p>
+    <p class="overview-info-title" @click="innerGreet">hello jumps</p>
     <div class="overview-info">
       <el-button @click="saySomething">saySomething</el-button>
       <el-button @click="mapaction">mapaction</el-button>
@@ -32,21 +32,22 @@ export default {
   methods: {
     saySomething() {
       this.claCount(2);
-      console.log(this.count);
     },
     toLogin() {
       this.$router.push({ name: 'login' });
     },
     mapaction() {
       this.addCount(10);
-      console.log(this.count);
     },
     ...mapMutations({
       claCount: 'CLA_COUNT'
     }),
     ...mapActions([
       'addCount'
-    ])
+    ]),
+    innerGreet() {
+      this.sayHello();
+    }
   }
 }
 </script>
