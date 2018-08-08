@@ -72,6 +72,12 @@ export default {
         fr.readAsDataURL(file);
         fr.onload = function(e) {
           document.getElementById('img').src = e.target.result;
+          let image = new Image();
+          image.onload = function() {
+            console.log(image.width);
+            console.log(image.height);
+          }
+          image.src = e.target.result;
         }
       }
     },
