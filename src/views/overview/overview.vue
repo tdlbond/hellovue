@@ -1,16 +1,24 @@
 <template>
   <div class="overview">
     <div class="overview-info overview-info-avatar">
-      <img :src="srcData" alt="">
+      <img id="img" src="" alt="">
     </div>
     <p class="overview-info-title" @click="innerGreet">hello jumps</p>
-    <input type="text" v-focus v-model="testValue">
+    <h2 slot="testSlot">haha</h2>
+    <input type="text" v-focus v-model="testValue" style="margin-bottom: 20px;">
     <div class="overview-info">
       <el-button @click="saySomething">saySomething</el-button>
       <el-button @click="mapaction">mapaction</el-button>
     </div>
     <div class="overview-info" style="margin-top: 20px;">
       <el-button @click="toLogin">Login</el-button>
+    </div>
+    <div style="margin: 20px 0;">
+      <label for="files">
+        <span v-if="!fileName" style="cursor: pointer;">上传文件</span>
+      </label>
+      <span v-if="fileName">{{ fileName }}<span @click="removeFile" class="el-icon-error" style="color: orange;margin-left: 10px;cursor: pointer;"></span></span>
+      <input id="files" type="file" @change="fileChange" style="display: none;">
     </div>
   </div>
 </template>
@@ -22,8 +30,9 @@ export default {
   mixins: [mixins],
   data() {
     return {
-      srcData: 'assets/haha.jpg',
-      testValue: ''
+      srcData: '',
+      testValue: '',
+      fileName: ''
     }
   },
   computed: {
@@ -49,6 +58,27 @@ export default {
     ]),
     innerGreet() {
       this.sayHello();
+      console.log(this.$slots)
+    },
+    fileChange() {
+      let file = document.getElementById('files').files[0];
+      if (file) {
+        if ((file.name.search(/\.(jpg|png|gif)$/)) === -1) {
+          return alert('上传文件格式不正确');
+        }
+        let name = file.name.replace(/\.(jpg|png)$/, '');
+        this.fileName = name;
+        let fr = new FileReader();
+        fr.readAsDataURL(file);
+        fr.onload = function(e) {
+          document.getElementById('img').src = e.target.result;
+        }
+      }
+    },
+    removeFile() {
+      this.fileName = '';
+      document.getElementById('img').src = '';
+      document.getElementById('files').value = '';
     }
   },
   watch: {
@@ -64,9 +94,9 @@ export default {
     width: 100%;
     .overview-info-avatar {
       img {
-        width: 200px;
-        height: 200px;
-        margin: 0 auto
+        // width: 200px;
+        // height: 200px;
+        // margin: 0 auto
       }
     }
     .overview-info-title {
