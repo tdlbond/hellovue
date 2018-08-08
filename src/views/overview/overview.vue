@@ -74,8 +74,8 @@ export default {
           document.getElementById('img').src = e.target.result;
           let image = new Image();
           image.onload = function() {
-            console.log(image.width);
-            console.log(image.height);
+            console.log(`image's width: ` + image.width);
+            console.log(`image's height: ` + image.height);
           }
           image.src = e.target.result;
         }

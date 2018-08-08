@@ -3,10 +3,16 @@
     <div class="forms">
       <el-form ref="loginForm" :model="formData" label-width="80px">
         <el-form-item label="名称：">
-          <el-input :model="formData.name"></el-input>
+          <el-input v-model="formData.name"></el-input>
         </el-form-item>
         <el-form-item label="密码：">
-          <el-input :model="formData.password"></el-input>
+          <el-input v-model="formData.password"></el-input>
+        </el-form-item>
+        <el-form-item label="描述：">
+          <el-input type="textarea" id="description" v-model="formData.desc"></el-input>
+          <div id="createBtnBlock" style="display: flex;justify-content: space-between;margin-top: 10px;">
+            <el-button @click="createBuffer" :disabled="!formData.desc">创建及下载二进制文件</el-button>
+          </div>
         </el-form-item>
         <el-form-item label="count：">
           <p>{{ count }}</p>
@@ -29,7 +35,8 @@ export default {
     return {
       formData: {
         name: '',
-        password: ''
+        password: '',
+        desc: ''
       }
     }
   },
@@ -44,6 +51,22 @@ export default {
     },
     cancel() {
       
+    },
+    createBuffer() {
+      if (this.formData.desc) {
+        let descVal = document.getElementById('description').value;
+        if (!window.URL) {
+          alert('浏览器不支持URL API的使用');
+        }
+        let descBlob = new Blob([descVal], { type: 'text/plain' });
+        let descA = document.createElement('a');
+        descA.download = 'description';
+        descA.href = URL.createObjectURL(descBlob);
+        document.getElementById('createBtnBlock').appendChild(descA); 
+        descA.click();
+        URL.revokeObjectURL(descA.href);
+        document.getElementById('createBtnBlock').removeChild(descA);
+      }
     }
   },
   created() {
