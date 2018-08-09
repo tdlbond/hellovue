@@ -23,6 +23,9 @@
         </el-form-item>
       </el-form>
     </div>
+    <div>
+      <canvas id="canvas" width="200" height="100"></canvas>
+    </div>
   </div>
 </template>
 <script>
@@ -50,7 +53,9 @@ export default {
       this.$router.push('/');
     },
     cancel() {
-      
+      this.axios.axiosGet(`/api/`).then(res => {
+        console.log(res.data);
+      })
     },
     createBuffer() {
       if (this.formData.desc) {
@@ -67,11 +72,22 @@ export default {
         URL.revokeObjectURL(descA.href);
         document.getElementById('createBtnBlock').removeChild(descA);
       }
+    },
+    drawPic() {
+      const canvas = document.getElementById('canvas');
+      const context = canvas.getContext('2d');
+      context.fillStyle = 'rgb(0, 0, 255)';
+      context.fillRect(1, 0, canvas.width, canvas.height);
+      context.fillStyle = 'rgb(255, 255, 0)';
+      context.fillRect(10, 20, 50, 50);
+      console.log(canvas.toDataURL('image/jpg'));
     }
   },
   created() {
-    console.log('hahaha');
-    console.log('hehehe');
+    
+  },
+  mounted() {
+    // this.drawPic();
   }
 }
 </script>
