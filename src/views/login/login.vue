@@ -24,7 +24,8 @@
       </el-form>
     </div>
     <div>
-      <canvas id="canvas" width="200" height="100"></canvas>
+      <canvas id="canvas" width="200" height="100" draggable="true"></canvas>
+      <div id="dragDiv" style="width: 100px;height: 50px;border: 1px #ccc solid;position: absolute;top: 50px;left: 50px;" draggable="true"></div>
     </div>
   </div>
 </template>
@@ -53,9 +54,20 @@ export default {
       this.$router.push('/');
     },
     cancel() {
-      this.axios.axiosGet(`/api/`).then(res => {
-        console.log(res.data);
-      })
+      // this.axios.axiosGet(`/api/`).then(res => {
+      //   console.log(res.data);
+      // });
+      const geolocation = window.navigator.geolocation;
+      if (geolocation) {
+        geolocation.getCurrentPosition(
+          position => {
+            console.log(position);
+          },
+          error => {
+            console.log(error);
+          }
+        )
+      }
     },
     createBuffer() {
       if (this.formData.desc) {
@@ -80,7 +92,26 @@ export default {
       context.fillRect(1, 0, canvas.width, canvas.height);
       context.fillStyle = 'rgb(255, 255, 0)';
       context.fillRect(10, 20, 50, 50);
-      console.log(canvas.toDataURL('image/jpg'));
+      // console.log(canvas.toDataURL('image/jpg'));
+    },
+    dragWatch() {
+      let offx = 0;
+      let offy = 0;
+      const drag = document.getElementById('dragDiv');
+      drag.addEventListener('dragstart', (data) => {
+        offx = data.clientX-drag.offsetLeft;
+        offy = data.clientY-drag.offsetTop;
+        data.dataTransfer.setData('text',(data.clientX-drag.offsetLeft)+";"+(data.clientY-drag.offsetTop));
+        // console.log((data.clientX-drag.offsetLeft)+";"+(data.clientY-drag.offsetTop))
+      })
+      drag.addEventListener('dragend', (data) => {
+        // for (let key in drag) {
+        //   console.log(key)
+        // }
+        console.log(data.dataTransfer.getData('Text'));
+        drag.style.left = data.x - offx + 'px';
+        drag.style.top = data.y - offy + 'px';
+      })
     }
   },
   created() {
@@ -88,6 +119,7 @@ export default {
   },
   mounted() {
     // this.drawPic();
+    this.dragWatch();
   }
 }
 </script>

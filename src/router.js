@@ -5,6 +5,7 @@ const Home = resolve => require(['./views/Home.vue'], resolve);
 const Login = resolve => require(['views/login/login.vue'], resolve);
 const Overview = resolve => require(['views/overview/overview.vue'], resolve);
 const Info = resolve => require(['views/info/info.vue'], resolve);
+const Maps = resolve => require(['views/maps/Maps.vue'], resolve);
 
 Vue.use(Router);
 
@@ -26,6 +27,11 @@ const router = new Router({
           path: 'info',
           name: 'info',
           component: Info,
+        },
+        {
+          path: 'maps',
+          name: 'maps',
+          component: Maps,
         }
       ]
     },
